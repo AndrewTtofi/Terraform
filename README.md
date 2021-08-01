@@ -1,4 +1,5 @@
-This repository is used for my journey with Terraform. As I am still new to Cloud Computing, I strongly believe that learning side by side Cloud Technologies with Infrastructure
+This repository is used for my journey with Terraformand AWS. 
+As I am still new to Cloud Computing, I strongly believe that learning side by side Cloud Technologies with Infrastructure
 as code will benefit my journey to becoming a successful DevOps Engineer.
 
 For starters I have created somme basic resources with the use of Terraform (project1.tf) which include EC2 instances, VPCs and a bit of subnets.
