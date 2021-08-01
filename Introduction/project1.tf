@@ -23,17 +23,31 @@ resource "aws_instance" "first-virtual-machine" {
 resource "aws_vpc" "first-vpc" {
   cidr_block       = "10.0.0.0/16"
   tags = {
-    Name = "First-VPC"
+    Name = "Production"
   }
 
 }
+resource "aws_vpc" "second-vpc" {
+  cidr_block       = "10.1.0.0/16"
+  tags = {
+    Name = "Developers"
+  }
 
+}
 resource "aws_subnet" "subnet-1" {
   vpc_id     =  aws_vpc.first-vpc.id
   cidr_block = "10.0.1.0/24"
 
   tags = {
-    Name = "first-vpc-subnet-1"
+    Name = "Production-Subnet"
+  }
+}
+resource "aws_subnet" "subnet-2" {
+  vpc_id     =  aws_vpc.second-vpc.id
+  cidr_block = "10.1.1.0/24"
+
+  tags = {
+    Name = "Developers-Subnet"
   }
 }
 
