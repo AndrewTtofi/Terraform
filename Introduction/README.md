@@ -13,3 +13,4 @@ I will try to create a fully functional project on AWS that will alllow me to te
   7. SNS
 
 Since all of the above will be tested as part of my journey to obtain the Solution Architect Certificate from Amazon best practices from AWS must be applied.
+❗❗❗Please note that any resources deployed from the Introduction Repository are not currently running so you are not able to view any of them (due to billing).
