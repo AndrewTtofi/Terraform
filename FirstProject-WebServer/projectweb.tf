@@ -144,3 +144,8 @@ resource "aws_instance" "ubuntu_server" {
     "Name" = "WebServer"
   }
 }
+
+#Usefull Terraform commands to show the State of the Resources deployed or details of the Resource
+  #terraform state  -> When you run this command a list of commands appears that helps us navigate throught the infrastructure
+  #terraform state list -> Lists all the available resources in our infrastructure
+  #terrafrom state show <resource> -> Shows details regarding the Resource we want to view
