@@ -121,6 +121,10 @@ resource "aws_eip" "one" {
   depends_on = [aws_internet_gateway.gw]
 }
 
+output "Elastic IP for Server 1" {    #When we apply the changes and Terraform runs the commands to form the infrastructure, it will at the end print out the 
+  value = aws_eip.one.public_ip       #public ip of our ElasticIP as Elastic IP for Server 1 = MPLA
+}
+
 #9 Create Ubuntu Server
 resource "aws_instance" "ubuntu_server" {
   ami = "ami-0a8e758f5e873d1c1"
@@ -145,7 +149,19 @@ resource "aws_instance" "ubuntu_server" {
   }
 }
 
+output "ID of Ubuntu Server" {            #Similarly to line 124 it will print out the ID created for our ubuntu machine 
+  value = aws_instance.ubuntu_server.id
+} 
+
+
+
+
 #Usefull Terraform commands to show the State of the Resources deployed or details of the Resource
   #terraform state  -> When you run this command a list of commands appears that helps us navigate throught the infrastructure
   #terraform state list -> Lists all the available resources in our infrastructure
   #terrafrom state show <resource> -> Shows details regarding the Resource we want to view
+  #terraform output allows you to print out some attributes of the Resource -> see line 124 or line 152
+  #if you want to destroy an individual resource then you can use the command:
+        #terraform destroy -target aws_instance.ubuntu_server (for example)
+  #if you want to deploy an individual resource then you can use the command:
+        #terraform apply -target aws_instance.ubuntu_server (for example)
