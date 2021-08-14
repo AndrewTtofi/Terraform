@@ -1,0 +1,86 @@
+Introduction to Terraform Certificate:
+	What is Infrastructure as Code?
+		Infrastructure as a concept is the managable machines-networks-resources-etc that are managed by logging on to a platform and clicking here and there.
+		As infrastructure is changing, and the same machine might one day be up and the other terminated (scalability-elasticity),
+		 we need to find a way to make those changes faster and in a more efficient manner.
+		By codifing the above, we benefit from savings, we can see the logs of the infrastructure (who changed what) and we provide a transparency to the infrastructure.
+		We can also automate all of the above so that we neglet the human errors and finally provide a versioning to the system.
+
+	Why change how we define and build infrastructure?
+		Virtual compute enabled us to build and apply configuration changes to infrastructures via software commands. While these commands were often scripted,
+		they were still hard for humans to read. More modern tools accepted code that was both human and machine readable, and provided additional benefits.
+		They simplified code testing, could apply and track the changes between iteration, and most importantly they enabled terms to reuse components (e.g modules)
+		of code across different projects. It's no wonder that IaC has developed such a significant following and adoption.
+
+	How does IaC fit into the infrastructure lifecycle?
+		IaC can be applied throughout the lifecycle, both on the initial build, as well as throughout the life of the infrastructure.
+		Commonly these are referred as Day 0 and Day 1. Day 0 provisions and configures your initial infrastructure.
+		If your infrastructure never changes after the initial build (No OS updates, no patches, no app configurations etc.) then
+		you may not need tools that support subsequent updates, changes and expansions. Day 1 refers to OS and application configurations
+		you apply after you have inittially built your infrastructure.
+		IaC makes it easy to provision and apply infrastructure configurations, saving time. It standarizes workflows across different infrastructure providers 
+		(VMWare, AWS, Azure etc.) by using a common syntax across all of them.
+		IaC makes it easy to understand the intent of infrastructure changes, because it can span multiple files, allowing human operators to organize the code based on the intent. For
+		example, an operatior could create different files to define infrastructure components, or separate variable definitions from execution blocks without affecting the execution.
+
+
+	IaC makes Infrastructure more Reliable:
+		IaC makes changes idempotent, consistent, repeatable, and predictable. Without IaC, scaling up infrastructure to meet increased demand may require an operator to remotely connect to each machine and then manually provision and configure many servers by executing a series of commands/scripts. They might open multiple sessions and move between screens, which often results in skipped steps or slight variations between how work is completed, necessitating rollbacks. Perhaps a command was run incorrectly on one instance and reverted before being re-run correctly.
+		These process inconsistencies can result in slight differences between servers that compound over time and could impact their performance, usability, or security. If a large team is applying changes, the risks increase because individuals don’t always follow the same instructions identically.
+		With IaC, we can test the code and review the results before the code is applied to our target environments. Should a result not align to our expectations, we iterate on the code until the results pass our tests and align to our expectations. Following this pattern allows for the outcome to be predicted before the code is applied to a production environment. Once ready for use, we can then apply that code via automation, at scale, ensuring consistency and repeatability in how it is applied.
+		Since code is checked into version control systems such as GitHub, GitLab, BitBucket, etc., it is possible to review how the infrastructure evolves over time. The idempotent characteristic provided by IaC tools ensures that, even if the same code is applied multiple times, the result remains the same.
+
+	
+	What is IaC and how it works?
+		Infrastructure as Code Definition:
+		You describe your infrastructure using Terraform's high-level configuration language in human-readable, declarative configuration files. This allows you to create a blueprint that you can version, share, and reuse.
+
+		Execution Plans
+		Terraform generates an execution plan describing what it will do and asks for your approval before making any infrastructure changes. This allows you to review changes before Terraform creates, updates, or destroys infrastructure.
+
+		Resource Graph
+		Terraform builds a resource graph and creates or modifies non-dependent resources in parallel. This allows Terraform to build resources as efficiently as possible and gives you greater insight into your infrastructure.
+
+		Change Automation
+		Terraform can apply complex changesets to your infrastructure with minimal human interaction. When you update configuration files, Terraform determines what changed and creates incremental execution plans that respect dependencies.
+
+	Terraform Use-Cases:
+		Heroku App Setup:
+			Configuring DNSimple to set a CNAME, or setting up Cloudflare as a CDN for the app. Best of all, Terraform can do all of this in under 30 seconds without using a web interface.
+
+		Multi-Tier Applications:
+			A very common pattern is the N-tier architecture. The most common 2-tier architecture is a pool of web servers that use a database tier. Additional tiers get added for API servers, caching servers, routing meshes, etc. This pattern is used because the tiers can be scaled independently and provide a separation of concerns.
+
+			Terraform is an ideal tool for building and managing these infrastructures. You can group resources in each tier together, and Terraform will automatically handle the dependencies between each tier. For example, Terraform will ensure the database tier is available before provisioning the web servers and that the load balancers are connected to the web nodes. You can then use Terraform to easily scale each tier by modifying the count configuration value. Because resource creation and provisioning is codified and automated, elastically scaling with load becomes trivial.
+
+		Self-Service Clusters:
+			At a certain organizational size, it becomes very challenging for a centralized operations team to manage a large and growing infrastructure. Instead it becomes more attractive to make "self-serve" infrastructure, allowing product teams to manage their own infrastructure using tooling provided by the central operations team.
+
+			You can use Terraform configuration to codify the knowledge of how to build and scale a service. You can then share these configurations throughout your organization, enabling customer teams to use Terraform to manage their services.
+
+		Software Demos:
+			Modern software is increasingly networked and distributed. Although tools like Vagrant exist to build virtualized environments for demos, it is still very challenging to demo software on real infrastructure which more closely matches production environments.
+
+			Software writers can provide a Terraform configuration to create, provision and bootstrap a demo on cloud providers like AWS. This allows end users to easily demo the software on their own infrastructure, and even enables tweaking parameters like cluster size to more rigorously test tools at any scale.
+
+		Disposable Environments
+			It is common practice to have both a production and staging or QA environment. These environments are smaller clones of their production counterpart, but are used to test new applications before releasing in production. As the production environment grows larger and more complex, it becomes increasingly onerous to maintain an up-to-date staging environment.
+
+			Using Terraform, the production environment can be codified and then shared with staging, QA or dev. These configurations can be used to rapidly spin up new environments to test in, and then be easily disposed of. Terraform can help tame the difficulty of maintaining parallel environments, and makes it practical to elastically create and destroy them.
+
+		Software Defined Networking
+			Software Defined Networking (SDN) is becoming increasingly prevalent in the datacenter, as it provides more control to operators and developers and allows the network to better support the applications running on top. Most SDN implementations have a control layer and infrastructure layer.
+
+			You can use Terraform to codify the configuration for software defined networks. Terraform can then use this configuration to automatically set up and modify settings by interfacing with the control layer. This allows the configuration to be versioned and changes to be automated. For example, you can use Terraform to configure AWS VPC.
+
+		Resource Schedulers
+			In large-scale infrastructures, static assignment of applications to machines becomes increasingly challenging. To solve that problem, there are a number of schedulers like Borg, Mesos, YARN, and Kubernetes. These can be used to dynamically schedule Docker containers, Hadoop, Spark, and many other software tools.
+
+			Terraform is not limited to physical providers like AWS. Resource schedulers can be treated as a provider, enabling Terraform to request resources from them. This allows Terraform to be used in layers: to setup the physical infrastructure running the schedulers as well as provisioning onto the scheduled grid.
+
+		Multi-Cloud Deployment
+			It's often attractive to spread infrastructure across multiple clouds to increase fault-tolerance. By using only a single region or cloud provider, fault tolerance is limited by the availability of that provider. Multi-cloud deployment allows for more graceful recovery of the loss of a region or entire provider.
+
+			Realizing multi-cloud deployments can be very challenging as many existing tools for infrastructure management are cloud-specific. Terraform is cloud-agnostic and allows a single configuration to be used to manage multiple providers, and to even handle cross-cloud dependencies. This simplifies management and orchestration, helping operators build large-scale multi-cloud infrastructures.
+
+		
