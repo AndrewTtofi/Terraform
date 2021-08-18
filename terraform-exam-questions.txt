@@ -1,0 +1,122 @@
+Sample Preparation questions for the Terraform Assosciate Exam:
+
+
+	Understand Infrastructure as Code Concepts:
+
+		Q1. What is Infrastructure as Code?
+			You write and execute the code to define, deploy, update and destroy your infrastructure
+	
+		Q2. What are the benefits of IaC?
+			-Automation:
+				We can bring up servers with one script and scale up and down based on our load with the same script
+			-Reusability of the code:
+				We can reuse the same code
+			-Versioning:
+				We can check it into version control and we get versioning. Now we can see an incremental history
+				of who changed what, how is our infrastructure actually defined at any given point of time, and we have this
+				transparency of documentation.
+			IaC makes changes idempotent, consistent, repeatable and predictable.
+	
+		Q3. How using IaC make it easy to provision infrastructure?
+			IaC makes it easy to provision and apply infrastructure configurations, saving time. It standarizes workflows across
+			different infrastructure providers (e.g. VMware, AWS, Azure, GCP, etc) by using a common syntax across all of them.
+	
+		Q4. What is Ideompotent in terms of IaC?
+			The idempotent characteristic provided by IaC tools ensures that, even if the same code is applied multiple times,
+			the result remains the same.
+	
+		Q5. What are Day 0 and Day 1 activities?
+			IaC can be applied throughout the lifecycle, both on the initial build, as well as throughout the life of the infrastructure.
+			Commmonly, these are referred to as Day 0 and Day 1 activities.
+			"DAY 0" code provisions and configures your initial infrastructure.
+			"DAY 1" refers to OS and application configurations you apply after you have initially built your infrastructure.
+	
+		Q6. What are the use cases of Terraform?
+			Heroku App Setup
+			Multi Tier Applications
+			Self-Service Clusters
+			Software Demos
+			Disposable Environments
+			Software Defined Networking
+			Resource Schedulers
+			Multi-Cloud Deployment
+			https://www.terraform.io/intro/use-cases.html
+	
+		Q7. What are the advantages of Terraform?
+			Platform Agnostic
+			State Management
+			Operator Confidence
+			https://learn.hashicorp.com/terraform/getting-started/intro
+	
+		Q8. Where do you describe all the components or your entire datacenter so that Terraform provision those?
+			Configuration files ends with *.tf
+
+		Q9. How can Terraform build infrastructure so efficiently?
+			Terraform builds a graph of all your resources, and parallelizes the creation and modification of any non-dependent resources.
+			Because of this, Terraform builds infrastructure as efficiently as possible, and operators get insight into dependecies in their infrastructure
+
+ 	Understand Terraform's purpose (vs other IaC):
+ 		Q10. What is multi-cloud deployment?
+ 			Provisioning your infrastructure into multiple cloud providers to increase fault-tolerance of your applications
+
+ 		Q11. How multi-cloud deployement is useful?
+ 			By using only a single region or cloud provider, fault tolerance is limited by availability of that provider.
+ 			Having multi-cloud deployment allows for more graceful recovery of the loss of a region or entire provider.
+
+ 		Q12. What is cloud-agnostic in terms of provisioning tools?
+ 			Cloud-agnostic allows a single configuration to be used to manage mmultiple providers, and to even handle cross-cloud dependecies.
+
+ 		Q13. Is Terraform cloud-agnostic?
+ 			Yes
+
+ 		Q14. What is the use of Terraform being cloud-agnostic?
+ 			It simplifies management and orchestration, helping operators build large-scale multi-cloud infrastructure.
+
+ 		Q15. What is Terraform State?
+ 			Every time your run terraform, it records information about what infrastructure it created in a terraform state file.
+ 			By default, when you run terraform in the folder /exmple/folder, terraform creates the file /exmple/folder/terraform.tfstate
+ 			This file contains a custom JSON format that records a mapping from the Terraform resources in your configuration files to the
+ 			representation of those resources in the real world.
+
+ 		Q16. What is the purpose of Terraform State?
+ 			Mapping to the Real World:
+ 				terraform requires some sort of database to map terraform config to the real world because you can't find the same functionality 
+ 				in every cloud provider. You need to have some kind of mechanism to be cloud-agnostic.
+
+ 			Metadata:
+ 				terraform must also track metadata such as resource dependecies, pointer to the provider configuration that was most recently used with the
+ 				resource in situations where multiple aliased providers are present.
+
+ 			Performance:
+ 				When running a terraform plan, Terraform must know the current state of resources in order to effectively determine the changes that it
+ 				needs to make to reach your desired configuration.
+ 				For larger infrastructure, querying every resource is too slow. Many cloud providers do not provide APIs query to multiple resource at once,
+ 				and the round trip time for each resource is hudnreds of milliseconds. So, Terraform stores a cache of the attribute valiues for all
+ 				resources in the state. This is the most optional feature of Terraform state and is done only as a performance improvement.
+
+ 			Syncing:
+ 				When two people work on the same file and doing some changes to the infrastructure. Its very important for everyone to be working
+ 				with the same state so that operations will be applied to the same remote objects.
+
+ 			https://www.terraform.io/docs/state/purpose.html
+
+ 		Q17. What is the name of the terraform state file?
+ 			terraform.tfstate
+
+ 	Understand the Terraform Basics:
+ 		Q18. How do you install terraform on different OS?
+ 			MAC OS:
+ 				brew install terraform
+
+ 			Windows:
+ 				choco install terraform
+
+ 			https://learn.hashicorp.com/terraform/getting-started/install
+
+ 		Q19. How do you manually install terraform?
+ 			1. download the zip file
+ 			2. mv ~/Downloads/terraform/usr/local/bin/terraform
+
+ 		Q20. Where do you put terraform configurations so that you can configure some behaviors of Terraform itself?
+ 			The special terraform configuration block type is used to configure some behaviors of terraform itseld, such as requiring a minimum terraform version
+ 			to apply your configuration.
